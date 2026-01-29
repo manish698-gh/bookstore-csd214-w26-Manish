@@ -16,7 +16,9 @@ public class App {
         populate();
         int choice = 0;
         while (choice != 99) {
-            System.out.println("\n***********************");
+
+            System.out.println(" Welcome to Ghimire's Everything Store");
+            System.out.println("***********************");
             System.out.println(" 1. Add Items");
             System.out.println(" 2. Edit Items");
             System.out.println(" 3. Delete Items");
@@ -68,6 +70,10 @@ public class App {
             System.out.println("2. Add Magazine");
             System.out.println("3. Add DiscMag");
             System.out.println("4. Add Ticket");
+            System.out.println("5. Add Pen");
+            System.out.println("6. Add Notebook");
+            System.out.println("7. Add Laptop");
+            System.out.println("8. Add Smartphone");
             System.out.println("99. Exit");
 
             try {
@@ -86,6 +92,10 @@ public class App {
                 case 2: item = new Magazine(); break;
                 case 3: item = new DiscMag(); break;
                 case 4: item = new Ticket(); break;
+                case 5: item = new Pen(); break;
+                case 6: item = new Notebook(); break;
+                case 7: item = new Laptop(); break;
+                case 8: item = new Smartphone(); break;
                 default: System.out.println("Invalid selection."); continue;
             }
 
@@ -111,6 +121,8 @@ public class App {
             System.out.println("3. Magazines");
             System.out.println("4. DiscMags");
             System.out.println("5. Tickets");
+            System.out.println("6. Stationery");
+            System.out.println("7. Electronics");
             System.out.println("99. Exit");
 
             try {
@@ -130,6 +142,8 @@ public class App {
                 case 3: filter = Magazine.class; break;
                 case 4: filter = DiscMag.class; break;
                 case 5: filter = Ticket.class; break;
+                case 6: filter = Stationery.class; break;
+                case 7: filter = Electronics.class; break;
                 default: System.out.println("Invalid selection."); continue;
             }
 

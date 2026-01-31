@@ -16,7 +16,8 @@ public class App {
         populate();
         int choice = 0;
         while (choice != 99) {
-            System.out.println("\n***********************");
+            System.out.println(" Welcome to Ghimire's Everything Store");
+            System.out.println("***********************");
             System.out.println(" 1. Add Items");
             System.out.println(" 2. Edit Items");
             System.out.println(" 3. Delete Items");
@@ -68,6 +69,10 @@ public class App {
             System.out.println("2. Add Magazine");
             System.out.println("3. Add DiscMag");
             System.out.println("4. Add Ticket");
+            System.out.println("5. Add Pen");
+            System.out.println("6. Add Notebook");
+            System.out.println("7. Add Laptop");
+            System.out.println("8. Add Smartphone");
             System.out.println("99. Exit");
 
             try {
@@ -86,14 +91,17 @@ public class App {
                 case 2: item = new Magazine(); break;
                 case 3: item = new DiscMag(); break;
                 case 4: item = new Ticket(); break;
+                case 5: item = new Pen(); break;
+                case 6: item = new Notebook(); break;
+                case 7: item = new Laptop(); break;
+                case 8: item = new Smartphone(); break;
                 default: System.out.println("Invalid selection."); continue;
             }
 
             if(item instanceof Editable) {
-                // PASS THE SHARED SCANNER
+
                 ((Editable)item).initialize(this.input);
             }
-
             addItem(item);
         }
     }
@@ -103,55 +111,7 @@ public class App {
     }
 
     public void listAny() {
-        int choice = 0;
-        while (choice != 99) {
-            System.out.println("\nAll Items");
-            System.out.println("-----------");
-            System.out.println("List");
-            System.out.println("1. All");
-            System.out.println("2. Books");
-            System.out.println("3. Magazines");
-            System.out.println("4. DiscMags");
-            System.out.println("5. Tickets");
-            System.out.println("99. Exit");
 
-            try {
-                String line = input.nextLine();
-                if (line.trim().isEmpty()) continue;
-                choice = Integer.parseInt(line.trim());
-            } catch (NumberFormatException e) {
-                choice = 0;
-            }
-
-            if (choice == 99) return;
-
-            Class<?> filter = null;
-            switch(choice) {
-                case 1: filter = null; break;
-                case 2: filter = Book.class; break;
-                case 3: filter = Magazine.class; break;
-                case 4: filter = DiscMag.class; break;
-                case 5: filter = Ticket.class; break;
-                default: System.out.println("Invalid selection."); continue;
-            }
-
-            for (SaleableItem i : items) {
-                boolean show = false;
-                if (filter == null) {
-                    show = true;
-                } else {
-                    if (filter == Magazine.class && i instanceof DiscMag) {
-                        show = false;
-                    } else if (filter.isInstance(i)) {
-                        show = true;
-                    }
-                }
-
-                if (show) {
-                    listI(i);
-                }
-            }
-        }
     }
 
     public void listI(Object o) {
@@ -180,40 +140,14 @@ public class App {
     }
 
     public void editItem(Editable item) {
-        // PASS THE SHARED SCANNER
+
         item.edit(this.input);
     }
 
     public void deleteItem() {
-        System.out.println("Select item index to delete:");
-        for(int i=0; i<items.size(); i++) {
-            System.out.println(i + ". " + items.get(i));
-        }
-        try {
-            int idx = Integer.parseInt(input.nextLine().trim());
-            if (idx >= 0 && idx < items.size()) {
-                items.remove(idx);
-                System.out.println("Item deleted.");
-            }
-        } catch (Exception e) {
-            System.out.println("Invalid selection.");
-        }
     }
 
     public void sellItem() {
-        System.out.println("Select item index to sell:");
-        for(int i=0; i<items.size(); i++) {
-            System.out.println(i + ". " + items.get(i));
-        }
-        try {
-            int idx = Integer.parseInt(input.nextLine().trim());
-            if (idx >= 0 && idx < items.size()) {
-                SaleableItem item = items.get(idx);
-                cashTill.sellItem(item);
-            }
-        } catch (Exception e) {
-            System.out.println("Invalid selection.");
-        }
     }
 
     public boolean findItemExists(SaleableItem item) {
@@ -231,45 +165,15 @@ public class App {
     }
 
     public void populate() {
-        System.out.println("Populating data with JavaFaker...");
-        Faker faker = new Faker();
 
-        for (int i = 0; i < 2; i++) {
-            // Book
-            Book b = new Book(
-                    faker.book().author(),
-                    faker.book().title(),
-                    faker.number().randomDouble(2, 10, 50), // Price
-                    faker.number().numberBetween(1, 20)     // Copies
-            );
-            addItem(b);
+    }
 
-            // Magazine
-            Magazine m = new Magazine(
-                    faker.number().numberBetween(100, 500), // Order Qty
-                    faker.date().past(30, TimeUnit.DAYS),   // Date
-                    faker.book().title() + " Monthly",      // Title
-                    faker.number().randomDouble(2, 5, 15),  // Price
-                    faker.number().numberBetween(5, 50)     // Copies
-            );
-            addItem(m);
 
-            // DiscMag
-            DiscMag dm = new DiscMag(
-                    faker.bool().bool(),                    // Has Disc
-                    faker.number().numberBetween(50, 200),  // Order Qty
-                    faker.date().past(60, TimeUnit.DAYS),   // Date
-                    "Tech Disc: " + faker.app().name(),     // Title
-                    faker.number().randomDouble(2, 10, 25), // Price
-                    faker.number().numberBetween(5, 30)     // Copies
-            );
-            addItem(dm);
+    public void clearItems() {
+        items.clear();
+    }
 
-            // Ticket
-            Ticket t = new Ticket();
-            t.description = "Concert: " + faker.rockBand().name();
-            t.price = faker.number().randomDouble(2, 50, 150);
-            addItem(t);
-        }
+    public List<SaleableItem> getItems() {
+        return new ArrayList<>(items);
     }
 }

@@ -8,14 +8,14 @@ public class Laptop extends Electronics {
 
     @Override
     public void initialize() {
-        super.initialize();  // Gets warranty AND price from Electronics
+        super.initialize();
         System.out.println("Enter Screen Size (inches):");
         this.screenSize = getInput(15.6);
     }
 
     @Override
     public void edit() {
-        super.edit();  // Edits warranty AND price from Electronics
+        super.edit();
         System.out.println("Edit Screen Size (inches):");
         this.screenSize = getInput(this.screenSize);
     }

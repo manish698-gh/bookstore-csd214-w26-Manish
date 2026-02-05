@@ -2,18 +2,18 @@ package csd214.bookstore.pojos;
 
 public abstract class Electronics extends Product {
     private int warrantyMonths;
-    private double price;  // ADD THIS FIELD
+    private double price;
 
     public int getWarrantyMonths() { return warrantyMonths; }
     public void setWarrantyMonths(int warrantyMonths) { this.warrantyMonths = warrantyMonths; }
 
-    // ADD proper getPrice() implementation
+
     @Override
     public double getPrice() {
-        return price;  // Return the actual price field
+        return price;
     }
 
-    // ADD setPrice() method
+
     public void setPrice(double price) {
         this.price = price;
     }
@@ -34,7 +34,7 @@ public abstract class Electronics extends Product {
         this.price = getInput(this.price);  // ADD THIS
     }
 
-    // You can also add a toString() method for Electronics if needed
+
     @Override
     public String toString() {
         return "Electronics[warranty=" + warrantyMonths +

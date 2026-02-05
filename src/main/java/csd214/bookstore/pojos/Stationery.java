@@ -36,11 +36,7 @@ public abstract class Stationery extends Product {
         this.price = getInput(this.price);  // ADD THIS LINE
     }
 
-    // REMOVE the old getPrice() that returns 0.0
-    // @Override
-    // public double getPrice() {
-    //     return 0.0; // We must add price field
-    // }
+
 
     @Override
     public String toString() {

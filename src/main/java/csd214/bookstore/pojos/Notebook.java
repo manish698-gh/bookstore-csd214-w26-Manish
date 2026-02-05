@@ -8,14 +8,14 @@ public class Notebook extends Stationery {
 
     @Override
     public void initialize() {
-        super.initialize();  // This now calls Stationery.initialize() which gets brand AND price
+        super.initialize();
         System.out.println("Enter Page Count:");
         this.pageCount = getInput(100);
     }
 
     @Override
     public void edit() {
-        super.edit();  // This now calls Stationery.edit() which edits brand AND price
+        super.edit();
         System.out.println("Edit Page Count:");
         this.pageCount = getInput(this.pageCount);
     }
